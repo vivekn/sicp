@@ -1,0 +1,18 @@
+(load "fermat.scm")
+(define (search-for-primes start k)
+    (cond ((= k 0) start)
+          ((prime? start) (search-for-primes (+ start 2) (- k 1)))
+          (else (search-for-primes (+ start 2) k))))
+
+(define (timed-prime-test start)
+    (newline)
+    (display start)
+    (newline)
+    (define (start-prime-test elapsed)
+        (search-for-primes start 3000)
+        (display (- (runtime) elapsed)))
+    (start-prime-test (runtime)))
+
+(timed-prime-test 1001)
+(timed-prime-test 10001)
+(timed-prime-test 10000000001)
